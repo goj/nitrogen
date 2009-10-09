@@ -1,11 +1,13 @@
 include Makefile.mk
 
-all: compile test
+all: compile app test
 
 compile:
 	mkdir -p ebin
 	mkdir -p test/ebin
 	erl -make
+
+app: compile
 	sed "s/@MODULES@/$(MODULES_LIST)/g" ./src/nitrogen.app.src > ./ebin/nitrogen.app
 
 clean:
