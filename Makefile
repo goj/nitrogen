@@ -1,9 +1,12 @@
+include Makefile.mk
+
 all: compile test
 
 compile:
 	mkdir -p ebin
 	mkdir -p test/ebin
 	erl -make
+	sed "s/@MODULES@/$(MODULES_LIST)/g" ./src/nitrogen.app.src > ./ebin/nitrogen.app
 
 clean:
 	rm -rf ./coverage/*.*

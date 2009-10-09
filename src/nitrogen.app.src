@@ -1,0 +1,7 @@
+{application, nitrogen, [
+    {description, "Nitrogen Web Framework for Erlang"},
+    {vsn, "dev"}, 
+    {modules, [@MODULES@]},
+    {registered, []},
+    {applications, [kernel, stdlib]}
+]}.
