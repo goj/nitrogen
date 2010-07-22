@@ -14,7 +14,8 @@
     html_encode/1, html_encode/2,
     hex_encode/1, hex_decode/1,
     url_encode/1, url_decode/1,
-    js_escape/1
+    js_escape/1,
+    query_encode/1
 ]).
 
 -include_lib ("wf.hrl").
@@ -157,6 +158,13 @@ js_escape(<<"<script", Rest/binary>>, Acc) -> js_escape(Rest, <<Acc/binary, "<sc
 js_escape(<<"script>", Rest/binary>>, Acc) -> js_escape(Rest, <<Acc/binary, "scr\" + \"ipt>">>);
 js_escape(<<C, Rest/binary>>, Acc) -> js_escape(Rest, <<Acc/binary, C>>);
 js_escape(<<>>, Acc) -> Acc.
+
+%%% ENCODE QUERY STRING %%%
+
+query_encode([]) ->
+    "";
+query_encode(Proplist) ->
+    "?" ++ string:join([url_encode(K) ++ "=" ++ url_encode(V) || {K, V} <- Proplist], "&").
 
 %%% CODE BELOW IS FROM MOCHIWEB %%%
 

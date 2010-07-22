@@ -46,14 +46,23 @@ coalesce(L) ->
     _Value = wf_utils:coalesce(L).
 
 %%% WF_REDIRECT %%%
-redirect(Url) -> 
+redirect(Url) ->
     action_redirect:redirect(Url).
 
-redirect_to_login(LoginUrl) -> 
+redirect(Url, QueryParams) ->
+    action_redirect:redirect(Url, QueryParams).
+
+redirect_to_login(LoginUrl) ->
     action_redirect:redirect_to_login(LoginUrl).
 
-redirect_from_login(DefaultUrl) -> 
+redirect_to_login(LoginUrl, QueryParams) ->
+    action_redirect:redirect_to_login(LoginUrl, QueryParams).
+
+redirect_from_login(DefaultUrl) ->
     action_redirect:redirect_from_login(DefaultUrl).
+
+redirect_from_login(DefaultUrl, QueryParams) ->
+    action_redirect:redirect_from_login(DefaultUrl, QueryParams).
 
 
 %%% EXPOSE WF_PICKLE %%%
@@ -106,6 +115,9 @@ hex_decode(S) ->
 
 js_escape(String) -> 
     _String = wf_convert:js_escape(String).
+
+query_encode(String) ->
+    _String = wf_convert:query_encode(String).
 
 
 %%% EXPOSE WF_BIND %%%
